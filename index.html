@@ -2,13 +2,16 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Tineret în Reacțiune</title>
-    <!-- Importăm fonturi specifice: Bangers pentru titluri (Comic style) și Poppins pentru text -->
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Cromatica extrasă din Logo-ul cu Rachetă */
             --pop-yellow: #FFC90E;
             --pop-red: #E62A2B;
             --pop-blue: #0E5E9C;
@@ -17,320 +20,262 @@
             --pop-cyan: #40C4FF;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        html { scroll-padding-top: 90px; }
+        
         body {
-            background-color: var(--pop-white);
-            color: var(--pop-black);
-            font-family: 'Poppins', sans-serif;
+            background-color: var(--pop-white); color: var(--pop-black);
+            font-family: 'Comic Neue', cursive; font-weight: 700;
             overflow-x: hidden;
-            /* Un pattern subtil tip Halftone (puncte de bandă desenată) pe fundal */
             background-image: radial-gradient(var(--pop-black) 10%, transparent 11%);
-            background-size: 15px 15px;
-            background-color: #f4f4f4;
+            background-size: 15px 15px; background-color: #f4f4f4;
         }
 
-        h1, h2, h3 {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        h1, h2, h3 { font-family: 'Bangers', cursive; letter-spacing: 2px; text-transform: uppercase; }
+        img { max-width: 100%; display: block; }
 
-        /* CLASA DE BAZĂ PENTRU STILUL COMIC BOOK */
-        .comic-box {
-            background-color: var(--pop-white);
-            border: 4px solid var(--pop-black);
-            box-shadow: 8px 8px 0px var(--pop-black);
-            border-radius: 0; /* Fără margini rotunjite în pop art pur */
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--pop-black); outline-offset: 3px; }
 
-        /* NAVIGARE */
+        /* --- NAVIGARE --- */
         nav {
-            padding: 1rem 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--pop-yellow);
-            border-bottom: 5px solid var(--pop-black);
-            box-shadow: 0px 5px 0px var(--pop-black);
+            padding: 1rem 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            background-color: var(--pop-yellow); border-bottom: 5px solid var(--pop-black); box-shadow: 0px 5px 0px var(--pop-black);
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-
-        .logo-container img {
-            height: 60px; /* Aici se va afișa racheta */
+        .logo-container { display: flex; align-items: center; gap: 15px; text-decoration: none; min-width: 0; }
+        .logo-container img { height: 60px; width: auto; flex-shrink: 0; animation: float-rocket 3.2s ease-in-out infinite; }
+        
+        @keyframes float-rocket {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
         nav h1 {
-            color: var(--pop-blue);
-            font-size: 2.2rem;
-            text-shadow: 2px 2px 0px var(--pop-white), 4px 4px 0px var(--pop-black);
+            color: var(--pop-blue); font-size: 2.2rem;
+            text-shadow: 2px 2px 0px var(--pop-white), 4px 4px 0px var(--pop-black); white-space: nowrap;
         }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
+        nav ul { list-style: none; display: flex; gap: 2rem; transition: all 0.3s ease; }
         nav a {
-            color: var(--pop-black);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            padding: 5px 10px;
-            transition: all 0.2s;
+            color: var(--pop-black); text-decoration: none; font-weight: 900; font-size: 1.2rem;
+            text-transform: uppercase; padding: 5px 10px; transition: all 0.2s;
+            font-family: 'Bangers', cursive; letter-spacing: 1px;
         }
+        nav a:hover { background-color: var(--pop-red); color: var(--pop-white); box-shadow: 4px 4px 0px var(--pop-black); }
 
-        nav a:hover {
-            background-color: var(--pop-red);
-            color: var(--pop-white);
-            box-shadow: 4px 4px 0px var(--pop-black);
+        .menu-toggle {
+            display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+            width: 46px; height: 46px; background-color: var(--pop-white); border: 3px solid var(--pop-black);
+            box-shadow: 3px 3px 0px var(--pop-black); cursor: pointer; flex-shrink: 0; z-index: 1002; position: relative;
         }
+        .menu-toggle span { display: block; width: 24px; height: 3px; background-color: var(--pop-black); transition: transform 0.3s ease, opacity 0.3s ease; }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-        /* HERO SECTION - Efect Sunburst */
+        /* --- HERO & BUTON SPARK --- */
         #hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            margin-top: 50px;
-            /* Fundal cu raze (Sunburst) Galben-Portocaliu */
-            background: repeating-conic-gradient(
-                var(--pop-yellow) 0 15deg,
-                #FF9500 15deg 30deg
-            );
-            border-bottom: 6px solid var(--pop-black);
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 120px 20px 60px; background: repeating-conic-gradient(var(--pop-yellow) 0 15deg, #FF9500 15deg 30deg); border-bottom: 6px solid var(--pop-black);
         }
-
         .hero-content {
-            background-color: var(--pop-white);
-            padding: 3rem;
-            max-width: 900px;
-            border: 6px solid var(--pop-black);
-            box-shadow: 12px 12px 0px var(--pop-black);
-            transform: rotate(-2deg);
+            background-color: var(--pop-white); padding: clamp(1.5rem, 5vw, 3rem); max-width: 900px; width: 100%;
+            border: 6px solid var(--pop-black); box-shadow: 12px 12px 0px var(--pop-black); transform: rotate(-2deg);
         }
+        #hero h2 { color: var(--pop-red); font-size: clamp(2.2rem, 7vw, 4.5rem); margin-bottom: 1rem; text-shadow: 3px 3px 0px var(--pop-black); line-height: 1.1; }
+        .quote { color: var(--pop-black); font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 700; margin-bottom: 2rem; font-style: italic; }
 
-        #hero h2 {
-            color: var(--pop-red);
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 0px var(--pop-black);
+        .btn-wrapper { position: relative; display: inline-block; }
+        .spark-peek {
+            position: absolute; width: 60px; bottom: 5px; right: 15px; z-index: 1;
+            pointer-events: none; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(3px 3px 0px var(--pop-black));
         }
-
-        .quote {
-            color: var(--pop-black);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        /* BUTON CTA COMIC BOOK */
+        .btn-wrapper:hover .spark-peek { transform: translate(40px, -45px) rotate(15deg) scale(1.1); }
+        
         .btn {
-            display: inline-block;
-            background-color: var(--pop-blue);
-            color: var(--pop-white);
-            padding: 15px 40px;
-            font-family: 'Bangers', cursive;
-            font-size: 2rem;
-            letter-spacing: 2px;
-            text-decoration: none;
-            border: 4px solid var(--pop-black);
-            box-shadow: 6px 6px 0px var(--pop-black);
-            transform: rotate(2deg);
-            transition: all 0.2s ease;
-            position: relative;
+            display: inline-block; background-color: var(--pop-blue); color: var(--pop-white); padding: 15px 40px;
+            font-family: 'Bangers', cursive; font-size: clamp(1.3rem, 4vw, 2rem); letter-spacing: 2px; text-decoration: none;
+            border: 4px solid var(--pop-black); box-shadow: 6px 6px 0px var(--pop-black); transform: rotate(2deg); transition: all 0.2s ease; position: relative; z-index: 2;
         }
+        .btn:hover { background-color: var(--pop-yellow); color: var(--pop-red); transform: translate(-4px, -4px) rotate(0deg); box-shadow: 10px 10px 0px var(--pop-black); }
+        .btn:active { transform: translate(0, 0) rotate(0deg); box-shadow: 3px 3px 0px var(--pop-black); }
 
-        .btn:hover {
-            background-color: var(--pop-yellow);
-            color: var(--pop-red);
-            transform: translate(-4px, -4px) rotate(0deg);
-            box-shadow: 10px 10px 0px var(--pop-black);
-        }
-
-        /* TITLURI SECȚIUNI */
+        /* --- SECȚIUNI --- */
         .section-title {
-            text-align: center;
-            font-size: 4rem;
-            margin-bottom: 3rem;
-            color: var(--pop-yellow);
-            text-shadow: 3px 3px 0px var(--pop-black);
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--pop-blue);
-            padding: 10px 30px;
-            border: 4px solid var(--pop-black);
-            box-shadow: 8px 8px 0px var(--pop-black);
+            text-align: center; font-size: clamp(2.2rem, 6vw, 4rem); display: block; width: fit-content; margin: 0 auto 3rem auto;
+            color: var(--pop-yellow); text-shadow: 3px 3px 0px var(--pop-black); background: var(--pop-blue);
+            padding: 10px 30px; border: 4px solid var(--pop-black); box-shadow: 8px 8px 0px var(--pop-black); max-width: 90%;
         }
-
-        /* SECȚIUNEA DESPRE */
-        #despre {
-            padding: 6rem 5%;
+        
+        #despre { padding: 6rem 5%; }
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
+        .comic-box {
+            background-color: var(--pop-white); border: 4px solid var(--pop-black); box-shadow: 8px 8px 0px var(--pop-black);
+            padding: 2.5rem; text-align: center; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
+        .comic-box:hover { transform: translateY(-10px) scale(1.02); box-shadow: 12px 12px 0px var(--pop-blue); }
+        .comic-box h3 { color: var(--pop-red); font-size: clamp(1.6rem, 4vw, 2.5rem); margin-bottom: 1rem; text-shadow: 2px 2px 0px var(--pop-black); }
+        .comic-box p { font-size: 1.15rem; line-height: 1.4; }
 
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        #galerie { padding: 6rem 5%; background-color: var(--pop-cyan); border-top: 6px solid var(--pop-black); border-bottom: 6px solid var(--pop-black); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); grid-auto-rows: 250px; gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .gallery-item { border: 4px solid var(--pop-black); box-shadow: 8px 8px 0px var(--pop-black); position: relative; cursor: pointer; transition: all 0.3s; overflow: hidden; background-color: var(--pop-white); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) saturate(1.2); transition: transform 0.4s ease; }
+        .gallery-item:hover { transform: translate(-5px, -5px); box-shadow: 13px 13px 0px var(--pop-red); }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* --- FOOTER & SPARK GIF --- */
+        footer { 
+            background-color: var(--pop-red); 
+            color: var(--pop-white); 
+            text-align: center; 
+            padding: 4rem 2rem; 
+            position: relative; /* Necesar pentru a poziționa corect GIF-ul cu Spark */
         }
-
-        .card {
-            padding: 2.5rem;
-            text-align: center;
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 12px 12px 0px var(--pop-blue);
-        }
-
-        .card h3 {
-            color: var(--pop-red);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 0px var(--pop-black);
-        }
-
-        .card p {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* GALERIE */
-        #galerie {
-            padding: 6rem 5%;
-            background-color: var(--pop-cyan);
-            border-top: 6px solid var(--pop-black);
-            border-bottom: 6px solid var(--pop-black);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            grid-auto-rows: 250px;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-item {
-            border: 4px solid var(--pop-black);
-            box-shadow: 8px 8px 0px var(--pop-black);
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s;
-            overflow: hidden;
-            background-color: var(--pop-white);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: contrast(1.2) saturate(1.2); /* Face pozele să arate mai "vibrante" */
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: 13px 13px 0px var(--pop-red);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* FOOTER / CONTACT */
-        footer {
-            background-color: var(--pop-red);
-            color: var(--pop-white);
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-
-        footer h2 {
-            font-size: 3rem;
-            color: var(--pop-yellow);
-            text-shadow: 2px 2px 0px var(--pop-black);
-            margin-bottom: 1rem;
-        }
-
-        footer p {
-            font-weight: 900;
-            font-size: 1.2rem;
-        }
-
-        .footer-links {
-            margin: 2rem 0;
-        }
-
+        footer h2 { font-size: clamp(2rem, 6vw, 3rem); color: var(--pop-yellow); text-shadow: 2px 2px 0px var(--pop-black); margin-bottom: 1rem; }
+        footer p { font-size: 1.2rem; word-break: break-word; }
+        .footer-links { margin: 2rem 0; }
         .footer-links a {
-            color: var(--pop-black);
-            background: var(--pop-yellow);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 1.2rem;
-            border: 3px solid var(--pop-black);
-            padding: 10px 25px;
-            box-shadow: 5px 5px 0px var(--pop-black);
-            transition: all 0.2s;
+            color: var(--pop-black); background: var(--pop-yellow); text-decoration: none; font-size: clamp(1rem, 3vw, 1.2rem); font-family: 'Bangers', cursive;
+            border: 3px solid var(--pop-black); padding: 10px 25px; box-shadow: 5px 5px 0px var(--pop-black); transition: all 0.2s; display: inline-block; letter-spacing: 1px;
+        }
+        .footer-links a:hover { background: var(--pop-blue); color: var(--pop-white); box-shadow: 8px 8px 0px var(--pop-black); transform: translateY(-3px); }
+
+        .spark-salut-gif {
+            position: absolute;
+            bottom: 20px;
+            right: 5%;
+            width: clamp(300px, 55vw, 550px);
+            z-index: 10;
         }
 
-        .footer-links a:hover {
-            background: var(--pop-blue);
-            color: var(--pop-white);
-            box-shadow: 8px 8px 0px var(--pop-black);
-            transform: translateY(-3px);
+        /* --- FEREASTRA POP-UP (MODAL) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(17, 17, 17, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(3px); padding: 15px;
         }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        .modal-content {
+            background-color: var(--pop-cyan); border: 6px solid var(--pop-black); box-shadow: 10px 10px 0px var(--pop-black);
+            padding: 3rem 2rem 2.5rem 2rem; width: 100%; max-width: 650px; max-height: 90vh; overflow-y: auto;
+            position: relative; transform: scale(0.5) rotate(-5deg); transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-align: left;
+        }
+        .modal-overlay.show .modal-content { transform: scale(1) rotate(0deg); }
+        .modal-content h2 { color: var(--pop-yellow); font-size: 2.5rem; text-shadow: 2px 2px 0px var(--pop-black); margin-bottom: 10px; text-align: center; }
+        .modal-logo-secundar { width: 120px; height: auto; margin: 0 auto 20px auto; border: 3px solid var(--pop-black); background: var(--pop-white); padding: 5px; box-shadow: 4px 4px 0px var(--pop-black); transform: rotate(3deg); }
+        .modal-content p { font-size: 1.1rem; margin-bottom: 15px; line-height: 1.4; background: var(--pop-white); padding: 12px; border: 3px solid var(--pop-black); }
+        .modal-details { background: var(--pop-yellow) !important; font-size: 1.1rem !important; }
+        .modal-content ul { background: var(--pop-white); padding: 15px 15px 15px 35px; border: 3px solid var(--pop-black); margin-bottom: 15px; font-size: 1.1rem; }
+        .modal-content ul li { margin-bottom: 8px; }
+        .modal-footer-text { background: transparent !important; border: none !important; padding: 0 !important; font-size: 0.95rem !important; margin-bottom: 5px !important; }
+        .close-btn {
+            position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; background-color: var(--pop-red); color: var(--pop-white);
+            border: 3px solid var(--pop-black); border-radius: 50%; font-family: 'Bangers', cursive; font-size: 1.3rem;
+            display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 3px 3px 0px var(--pop-black); transition: all 0.2s ease; z-index: 10;
+        }
+        .close-btn:hover { background-color: var(--pop-yellow); color: var(--pop-black); transform: scale(1.1) rotate(10deg); }
+        .modal-btn-container { text-align: center; margin-top: 20px; }
 
-        /* ANIMAȚII BOUNCY LA SCROLL */
-        .comic-pop {
-            opacity: 0;
-            transform: scale(0.5) rotate(-5deg);
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        /* --- SPARK ZBURĂTORUL CURSOR --- */
+        #spark-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 70px;
+            pointer-events: none;
+            z-index: 99999;
+            display: none;
+            transform-origin: center center;
+            will-change: transform, opacity;
+            filter: drop-shadow(6px 6px 0px rgba(17, 17, 17, 0.6));
+            opacity: 0; 
+            transition: opacity 0.3s ease; 
         }
+        @media (hover: hover) and (pointer: fine) { #spark-cursor { display: block; } }
+        
+        .comic-pop { opacity: 0; transform: scale(0.5) rotate(-5deg); transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .comic-pop.active { opacity: 1; transform: scale(1) rotate(0deg); }
 
-        .comic-pop.active {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
+        /* --- RESPONSIV MOBIL --- */
+        @media (max-width: 900px) { .hero-content { transform: rotate(0deg); } }
+        @media (max-width: 768px) {
+            html { scroll-padding-top: 75px; }
+            nav { padding: 0.8rem 5%; flex-wrap: wrap; }
+            nav h1 { font-size: 1.4rem; }
+            .logo-container img { height: 42px; }
+            .menu-toggle { display: flex; }
+            nav ul { position: fixed; top: 0; right: 0; height: 100vh; width: min(75vw, 300px); background-color: var(--pop-yellow); border-left: 5px solid var(--pop-black); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 1001; }
+            nav ul.open { transform: translateX(0); }
+            #hero { padding-top: 100px; }
+            .btn { padding: 12px 28px; }
+            .section-title { padding: 8px 20px; box-shadow: 5px 5px 0px var(--pop-black); }
+            #despre, #galerie { padding: 4rem 6%; }
+            .cards-container { gap: 2rem; }
+            .gallery-grid { grid-auto-rows: 220px; gap: 1.5rem; }
+            .comic-box { box-shadow: 5px 5px 0px var(--pop-black); padding: 1.5rem; }
+            .card:hover, .gallery-item:hover { transform: none; }
+            .modal-content { padding: 3rem 1.2rem 1.5rem 1.2rem; border-width: 4px; box-shadow: 6px 6px 0px var(--pop-black); }
+            .modal-content h2 { font-size: 2rem; }
+            .close-btn { right: 10px; top: 10px; width: 35px; height: 35px; font-size: 1.1rem; }
+            .spark-peek { display: none; }
+            
+            /* Centrare Spark GIF pe mobil */
+            .spark-salut-gif {
+                position: relative;
+                bottom: 0;
+                right: 0;
+                margin: 0 auto 20px auto;
+                display: block;
+                width: 220px;
+            }
         }
+        @media (max-width: 420px) { #hero h2 { font-size: 2rem; } .gallery-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
+    <img src="spark2.png" alt="Spark Mascota Zburând" id="spark-cursor">
+
+    <div class="modal-overlay" id="invitationModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal" aria-label="Închide">X</button>
+            <h2>Invitație Cafenea Civică</h2>
+            <img src="logo-invitatie.png" alt="Logo Proiect" class="modal-logo-secundar">
+            <p><strong>Echipa “Tineret în (re)acțiune” - Club de implicare civică</strong> vă invită sâmbătă, de la ora <strong>10:30</strong>, la o întâlnire dedicată dialogului deschis și ideilor pentru comunitate, organizată cu persoane interesate de problemele tinerilor.</p>
+            <p>Evenimentul este conceput ca un spațiu relaxat de întâlnire între tineri, comunitate și partenerii sociali. Scopul nostru este de a discuta despre impactul pe care inițiativele de tineret îl au în dezvoltarea locală.</p>
+            <p class="modal-details">
+                📍 <strong>Locație:</strong> Centrul Multifuncțional Focșani (Aleea Căminului, nr. 12, cartier Bahne)<br><br>
+                ☕ <strong>Format:</strong> Cafenea civică (dialog informal, schimb de bune practici, rețea de contacte)
+            </p>
+            <h3 style="color: var(--pop-black); text-align: left; margin: 15px 0 10px 0; font-family: 'Comic Neue', cursive;">În program:</h3>
+            <ul>
+                <li>Prezentarea scopului și obiectivelor proiectului Erasmus+ „Tineret în (re)acțiune”</li>
+                <li>Sesiune de discuții libere privind implicarea civică a tinerilor din Vrancea</li>
+                <li>Oportunități de colaborare între comunitate, tineri și autoritățile locale</li>
+                <li>Moment de networking însoțit de cafea și gustări</li>
+            </ul>
+            <p class="modal-footer-text" style="font-style: italic; color: #333;">*Cafeneaua Civică (World Café) este o metodă de educație nonformală și participare publică ce presupune crearea unui spațiu de dialog relaxat în care oamenii dezbat teme comunitare sau sociale.</p>
+            <p class="modal-footer-text" style="margin-top: 15px;">
+                Proiectul (cod: 2026-1-RO01-KA154-YOU-000400353) este implementat de Asociația „Eu, tu și ei” și finanțat de UE prin Erasmus+.<br><br>
+                ✉️ salut@tineretinreactiune.ro | 📞 0744 217 031<br>
+                <strong>Vă așteptăm cu drag!</strong><br>
+                <em>Teodora Danțiș, Coordonator proiect</em>
+            </p>
+            <div class="modal-btn-container">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8GzNYv2G-qYF9tvZQuo2V_rJ1vVKJ703wrS6ZpItJ47BdLA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn" style="font-size: 1.1rem; padding: 10px 25px;">Confirmă Participarea!</a>
+            </div>
+        </div>
+    </div>
+
     <nav>
         <a href="#" class="logo-container">
-            <!-- Asigură-te că imaginea decupată se numește logo-racheta.png și e în același folder -->
-            <img src="logo-racheta.jpeg" alt="Logo Rachetă">
+            <img src="logo-racheta.jpeg" alt="Logo Rachetă" width="60" height="60">
             <h1>Tineret <span>în</span> Reacțiune</h1>
         </a>
-        <ul>
+        <button class="menu-toggle" id="menuToggle" aria-label="Deschide meniul">
+            <span></span><span></span><span></span>
+        </button>
+        <ul id="navMenu">
             <li><a href="#despre">Despre</a></li>
             <li><a href="#galerie">Galerie</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -343,22 +288,25 @@
             <div class="quote">
                 „Voluntariatul nu este doar o activitate, ci este vocea celor care refuză să fie simpli spectatori la construirea viitorului lor.”
             </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8GzNYv2G-qYF9tvZQuo2V_rJ1vVKJ703wrS6ZpItJ47BdLA/viewform?usp=header" target="_blank" class="btn">GO! Înscrie Echipa!</a>
+            <div class="btn-wrapper">
+                <img src="spark.png" alt="Spark Peeking" class="spark-peek">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8GzNYv2G-qYF9tvZQuo2V_rJ1vVKJ703wrS6ZpItJ47BdLA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn">GO! Înscrie Echipa!</a>
+            </div>
         </div>
     </section>
 
     <section id="despre">
         <h2 class="section-title comic-pop">CUM FUNCȚIONEAZĂ?</h2>
         <div class="cards-container">
-            <div class="card comic-box comic-pop" style="transition-delay: 0.1s;">
+            <div class="comic-box comic-pop" style="transition-delay: 0.1s;">
                 <h3>BAM! Echipe Unite</h3>
                 <p>Formăm echipe puternice de câte 5 adolescenți pasionați. Sub îndrumarea unui mentor, învățați să transformați ideile în realitate.</p>
             </div>
-            <div class="card comic-box comic-pop" style="transition-delay: 0.2s;">
+            <div class="comic-box comic-pop" style="transition-delay: 0.2s;">
                 <h3>POW! Workshop-uri</h3>
                 <p>Participați la ateliere interactive unde învățați să comunicați eficient, să vă prezentați ideile curajos și să deveniți lideri.</p>
             </div>
-            <div class="card comic-box comic-pop" style="transition-delay: 0.3s;">
+            <div class="comic-box comic-pop" style="transition-delay: 0.3s;">
                 <h3>BOOM! Inițiative</h3>
                 <p>Colecte de carte, evenimente culturale sau ecologizare. Voi veniți cu ideea, noi vă ajutăm să o puneți în practică.</p>
             </div>
@@ -368,48 +316,86 @@
     <section id="galerie">
         <h2 class="section-title comic-pop">SURPRINS ÎN ACȚIUNE!</h2>
         <div class="gallery-grid">
-            <div class="gallery-item comic-pop" style="transition-delay: 0.1s;">
-                <img src="poza1.jpg" alt="Educație rurală">
-            </div>
-            <div class="gallery-item comic-pop" style="transition-delay: 0.2s;">
-                <img src="poza2.jpg" alt="Echipă și ateliere">
-            </div>
-            <div class="gallery-item comic-pop" style="transition-delay: 0.3s;">
-                <img src="poza3.jpg" alt="Tineri voluntari">
-            </div>
+            <div class="gallery-item comic-pop" style="transition-delay: 0.1s;"><img src="poza1.jpg" alt="Educație rurală" loading="lazy"></div>
+            <div class="gallery-item comic-pop" style="transition-delay: 0.2s;"><img src="poza2.jpg" alt="Echipă și ateliere" loading="lazy"></div>
+            <div class="gallery-item comic-pop" style="transition-delay: 0.3s;"><img src="poza3.jpg" alt="Tineri voluntari" loading="lazy"></div>
         </div>
     </section>
 
     <footer id="contact">
+        <img src="spark-wave.gif" alt="Spark făcând cu mâna" class="spark-salut-gif">
+
         <h2 class="comic-pop">AI O IDEE? VORBEȘTE CU NOI!</h2>
         <p class="comic-pop" style="transition-delay: 0.1s;">contact@tineretinreactiune.ro</p>
-        
         <div class="footer-links comic-pop" style="transition-delay: 0.2s;">
-            <a href="https://carteinsate.ro" target="_blank">VEZI PROIECTUL CARTE ÎN SATE</a>
+            <a href="https://carteinsate.ro" target="_blank" rel="noopener noreferrer">VEZI PROIECTUL CARTE ÎN SATE</a>
         </div>
-        
-        <p class="comic-pop" style="transition-delay: 0.3s; font-size: 0.9rem; margin-top: 30px;">
+        <p class="comic-pop" style="transition-delay: 0.3s; font-size: 1rem; margin-top: 30px;">
             &copy; 2026 Tineret în Reacțiune. Un proiect al asociației.
         </p>
     </footer>
 
     <script>
-        // Funcția care adaugă clasa 'active' pentru animația de bandă desenată ("Bouncy / Pop")
+        window.addEventListener('load', function() {
+            setTimeout(function() { document.getElementById('invitationModal').classList.add('show'); }, 1000);
+        });
+        document.getElementById('closeModal').addEventListener('click', function() { document.getElementById('invitationModal').classList.remove('show'); });
+        document.getElementById('invitationModal').addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('show'); } });
+
         function revealComic() {
             var reveals = document.querySelectorAll(".comic-pop");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
             }
         }
-
         window.addEventListener("scroll", revealComic);
-        revealComic(); // Rulează și la încărcarea paginii
+        window.addEventListener("resize", revealComic);
+        revealComic(); 
+
+        var menuToggle = document.getElementById("menuToggle");
+        var navMenu = document.getElementById("navMenu");
+        menuToggle.addEventListener("click", function () {
+            var isOpen = navMenu.classList.toggle("open");
+            menuToggle.classList.toggle("open", isOpen);
+        });
+        navMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () { navMenu.classList.remove("open"); menuToggle.classList.remove("open"); });
+        });
+
+        // Logica pentru spark2.png (zborul cu inerție spre cursor)
+        const spark = document.getElementById('spark-cursor');
+        let mouseX = window.innerWidth / 2, mouseY = -150;
+        let sparkX = window.innerWidth / 2, sparkY = -150;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            spark.style.opacity = '1'; 
+        });
+
+        function animateSpark() {
+            let distX = mouseX - sparkX;
+            let distY = mouseY - sparkY;
+            
+            let distance = Math.hypot(distX, distY);
+            if (distance < 15) {
+                spark.style.opacity = '0';
+            }
+
+            let speed = 0.08; 
+            sparkX += distX * speed;
+            sparkY += distY * speed;
+
+            let angle = Math.atan2(distY, distX) * (180 / Math.PI) + 180;
+            let flip = distX > 0 ? -1 : 1; 
+
+            spark.style.transform = `translate(${sparkX - 35}px, ${sparkY - 35}px) rotate(${angle}deg) scaleY(${flip})`;
+
+            requestAnimationFrame(animateSpark);
+        }
+        animateSpark();
     </script>
 </body>
 </html>
