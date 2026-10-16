@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; manifest-src 'self'; worker-src 'self'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title data-i18n="meta.title.calendar">Calendar Evenimente - Tineret în Reacțiune</title>
+    <meta name="description" content="Vezi activitățile și evenimentele organizate de Tineret în Reacțiune, clubul de implicare civică pentru tinerii din Vrancea." data-i18n-attr="content:meta.desc.calendar">
+    <link rel="canonical" href="https://tineretinreactiune.ro/calendar.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tineret în Reacțiune">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:url" content="https://tineretinreactiune.ro/calendar.html">
+    <meta property="og:title" content="Calendar Evenimente - Tineret în Reacțiune">
+    <meta property="og:description" content="Activitățile și evenimentele proiectului Tineret în Reacțiune.">
+    <meta property="og:image" content="https://tineretinreactiune.ro/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#FFC90E">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="Noutăți - Tineret în Reacțiune" href="https://tineretinreactiune.ro/feed.xml">
+    <link rel="preload" href="fonts/bangers-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/patrick-hand-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script src="lang-init.js"></script>
+    <noscript><style>.comic-pop{opacity:1 !important;scale:none !important;rotate:none !important}</style></noscript>
+</head>
+<body class="pop-art-bg" data-page="calendar">
+
+    <a href="#main" class="skip-link" data-i18n="a11y.skip">Sari la conținut</a>
+
+    <header class="pop-header" id="site-header"></header>
+
+    <main id="main">
+        <section class="pop-inner-page">
+            <div class="pop-inner-content" style="max-width: 1000px;">
+                <h1 class="inner-title comic-pop" data-i18n="cal.title">CALENDAR ACTIVITĂȚI</h1>
+                <p class="inner-text comic-pop" style="transition-delay:0.1s; margin-bottom: 30px;" data-i18n="cal.intro">Vino alături de noi! Mai jos găsești activitățile proiectului.</p>
+
+                <section class="events-section" aria-labelledby="up-title">
+                    <h2 id="up-title" class="events-heading comic-pop" data-i18n="cal.upcoming">Urmează</h2>
+                    <div class="calendar-grid" id="events-upcoming"></div>
+                </section>
+
+                <section class="events-section" id="events-past-section" aria-labelledby="past-title" hidden>
+                    <h2 id="past-title" class="events-heading comic-pop" data-i18n="cal.past">Evenimente trecute</h2>
+                    <div class="calendar-grid" id="events-past"></div>
+                </section>
+
+                <noscript><p class="inner-text" data-i18n="cal.noscript">Activează JavaScript pentru a vedea calendarul sau scrie-ne la salut@tineretinreactiune.ro.</p></noscript>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pop-footer" id="site-footer"></footer>
+
+    <script src="site-data.js"></script>
+    <script src="i18n.js"></script>
+    <script src="shared.js"></script>
+    <script src="animations.js"></script>
+    <script src="calendar.js"></script>
+    <script src="search.js"></script>
+    <script src="spark.js"></script>
+</body>
+</html>

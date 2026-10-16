@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Noutăți - Tineret în Reacțiune</title>
+    <link>https://tineretinreactiune.ro/noutati.html</link>
+    <atom:link href="https://tineretinreactiune.ro/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Noutăți din proiectul Erasmus+ Tineret în Reacțiune, clubul de implicare civică pentru tinerii din Vrancea.</description>
+    <language>ro</language>
+    <lastBuildDate>Fri, 16 Oct 2026 15:04:50 +0000</lastBuildDate>
+    <item>
+      <title>Vocea ta contează! Caravana „Tineret în (re)acțiune” merge în liceele vrâncene</title>
+      <link>https://tineretinreactiune.ro/noutati/caravana-povestea-ta-vocea-ta.html</link>
+      <guid isPermaLink="true">https://tineretinreactiune.ro/noutati/caravana-povestea-ta-vocea-ta.html</guid>
+      <pubDate>Fri, 16 Oct 2026 09:00:00 +0300</pubDate>
+      <description>În Săptămâna Erasmus, Caravana „Povestea ta / Vocea ta” a pornit prin liceele din Vrancea: Vidra, Focșani, Odobești, apoi spre internatele din mediul rural. Vezi pe unde am fost și cum te poți înscrie în echipă.</description>
+      <category>Caravana</category>
+      <category>Erasmus+</category>
+      <category>Licee</category>
+      <category>Înscrieri</category>
+    </item>
+  </channel>
+</rss>

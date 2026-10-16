@@ -1,0 +1,7 @@
+---
+# cPanel » Git Version Control » "Deploy HEAD Commit" runs these tasks.
+# Copies the site into public_html, leaving out the files listed in .deployignore.
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/
+    - /usr/bin/rsync -a --exclude-from=.deployignore ./ $DEPLOYPATH

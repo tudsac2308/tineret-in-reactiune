@@ -1,0 +1,58 @@
+# .htaccess - Apache / cPanel settings for tineretinreactiune.ro
+
+Options -Indexes
+ErrorDocument 404 /404.html
+
+# --- HTTPS + fără "www" ---
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://tineretinreactiune.ro%{REQUEST_URI} [L,R=301]
+    RewriteCond %{HTTP_HOST} ^www\.tineretinreactiune\.ro$ [NC]
+    RewriteRule ^ https://tineretinreactiune.ro%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Fișiere care nu trebuie să fie publice (dacă ajung pe server din greșeală) ---
+RedirectMatch 404 ^/(archive/|\.claude/|\.git|_content/|_tools/|CLAUDE\.md$|README\.md$|\.claudeignore$|\.cpanel\.yml$|\.deployignore$)
+
+# --- Tipuri de fișiere ---
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+    AddType image/webp .webp
+    AddType font/woff2 .woff2
+    AddType text/calendar .ics
+    AddCharset utf-8 .html .css .js .json .xml .txt .webmanifest
+</IfModule>
+
+# --- Antete de securitate ---
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "DENY"
+    Header always set Content-Security-Policy "frame-ancestors 'none'"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
+
+    # Pagini, CSS, JS: verificate la fiecare vizită (fișierele nu au versiune în nume)
+    <FilesMatch "\.(html|css|js|json|webmanifest|xml|txt)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    # Fonturi: nu se schimbă niciodată
+    <FilesMatch "\.woff2$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # Imagini
+    <FilesMatch "\.(png|webp|jpe?g|svg|ico)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    # Service worker-ul trebuie mereu verificat
+    <Files "sw.js">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </Files>
+</IfModule>
+
+# --- Compresie ---
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/rss+xml application/javascript text/javascript application/json application/manifest+json image/svg+xml
+</IfModule>

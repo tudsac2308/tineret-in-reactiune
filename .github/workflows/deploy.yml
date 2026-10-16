@@ -1,0 +1,81 @@
+# Every push to "main" publishes the site on the cPanel hosting (Hostico) and tells search engines.
+#
+# Needs these repository secrets (GitHub » Settings » Secrets and variables » Actions):
+#   CPANEL_HOST       e.g. glc53.hostico.ro           (the server name from the cPanel welcome email)
+#   CPANEL_USER       the cPanel username
+#   CPANEL_TOKEN      cPanel » Security » Manage API Tokens » Create
+#   CPANEL_REPO_PATH  e.g. /home/USERNAME/repositories/tineret-in-reactiune
+# Without them the workflow does nothing (and says so), so pushing is always safe.
+name: Publish to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull the new commit on the server and deploy it
+        id: deploy
+        env:
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+          CPANEL_REPO_PATH: ${{ secrets.CPANEL_REPO_PATH }}
+        run: |
+          if [ -z "$CPANEL_HOST" ] || [ -z "$CPANEL_USER" ] || [ -z "$CPANEL_TOKEN" ] || [ -z "$CPANEL_REPO_PATH" ]; then
+            echo "::warning::cPanel secrets are not set yet, so nothing was published. See README.md."
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          uapi() {
+            curl -sS --fail-with-body --max-time 120 \
+              -H "Authorization: cpanel $CPANEL_USER:$CPANEL_TOKEN" \
+              "https://$CPANEL_HOST:2083/execute/$1" "${@:2}"
+          }
+          check() {
+            python3 -c 'import json,sys; r=json.load(sys.stdin); sys.exit(0 if r.get("status")==1 else "cPanel: %s" % (r.get("errors") or r))'
+          }
+          echo "1/2 Pulling main from GitHub on the server…"
+          uapi VersionControl/update --data-urlencode "repository_root=$CPANEL_REPO_PATH" --data-urlencode "branch=main" | check
+          echo "2/2 Deploying (.cpanel.yml)…"
+          uapi VersionControlDeployment/create --data-urlencode "repository_root=$CPANEL_REPO_PATH" | check
+          echo "published=true" >> "$GITHUB_OUTPUT"
+
+      - name: Check the live site
+        if: steps.deploy.outputs.published == 'true'
+        run: |
+          sleep 15
+          curl -sS --fail -o /dev/null -w "Homepage: %{http_code}\n" https://tineretinreactiune.ro/
+          curl -sS --fail -o /dev/null -w "sw.js: %{http_code}\n" https://tineretinreactiune.ro/sw.js
+
+      - name: Tell Bing, DuckDuckGo & co. about the pages (IndexNow)
+        if: steps.deploy.outputs.published == 'true'
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request
+          urls = re.findall(r"<loc>([^<]+)</loc>", open("sitemap.xml", encoding="utf-8").read())
+          body = json.dumps({
+              "host": "tineretinreactiune.ro",
+              "key": "a37aaf7e49c0796eb5164d3df9a87b5c",
+              "keyLocation": "https://tineretinreactiune.ro/a37aaf7e49c0796eb5164d3df9a87b5c.txt",
+              "urlList": urls,
+          }).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body,
+                                       headers={"Content-Type": "application/json; charset=utf-8"})
+          with urllib.request.urlopen(req, timeout=30) as r:
+              print("IndexNow:", r.status, "for", len(urls), "pages")
+          PY

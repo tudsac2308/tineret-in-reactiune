@@ -1,0 +1,15 @@
+# Not part of the published site
+archive/
+.claude/
+CLAUDE.md
+.claudeignore
+
+# Original photos stay on this computer (they can contain GPS data);
+# _tools/build.py publishes the cleaned-up .webp copies in noutati/img/.
+_content/foto/
+
+__pycache__/
+*.pyc
+Thumbs.db
+desktop.ini
+.DS_Store

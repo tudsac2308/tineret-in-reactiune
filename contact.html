@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; manifest-src 'self'; worker-src 'self'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title data-i18n="meta.title.contact">Contact Proiect - Tineret în Reacțiune</title>
+    <meta name="description" content="Contactează echipa Tineret în Reacțiune: email, telefon și formular de contact. Ai o idee sau vrei să te alături echipei? Scrie-ne!" data-i18n-attr="content:meta.desc.contact">
+    <link rel="canonical" href="https://tineretinreactiune.ro/contact.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tineret în Reacțiune">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:url" content="https://tineretinreactiune.ro/contact.html">
+    <meta property="og:title" content="Contact Proiect - Tineret în Reacțiune">
+    <meta property="og:description" content="Contactează echipa Tineret în Reacțiune.">
+    <meta property="og:image" content="https://tineretinreactiune.ro/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#FFC90E">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="Noutăți - Tineret în Reacțiune" href="https://tineretinreactiune.ro/feed.xml">
+    <link rel="preload" href="fonts/bangers-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/patrick-hand-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script src="lang-init.js"></script>
+    <noscript><style>.comic-pop{opacity:1 !important;scale:none !important;rotate:none !important}</style></noscript>
+</head>
+<body class="pop-art-bg" data-page="contact">
+
+    <a href="#main" class="skip-link" data-i18n="a11y.skip">Sari la conținut</a>
+
+    <header class="pop-header" id="site-header"></header>
+
+    <main id="main">
+        <section class="pop-inner-page">
+            <div class="pop-inner-content">
+                <h1 class="inner-title comic-pop" data-i18n="contact.title">VORBEȘTE CU NOI!</h1>
+
+                <p class="inner-text comic-pop" style="transition-delay:0.1s" data-i18n="contact.intro">Ai o idee, o întrebare sau vrei să te alături echipei? Nu ezita să ne scrii un mesaj sau să ne apelezi.</p>
+
+                <div class="panou-contact comic-pop" style="transition-delay:0.2s; border: 4px solid var(--pop-black); padding: 30px; text-align: left; background: var(--pop-white); box-shadow: 10px 10px 0px var(--pop-black); max-width: 600px; margin: 30px auto;">
+                    <h2 style="color: var(--pop-blue); margin-bottom: 15px; font-size: 2rem; text-shadow: 1px 1px 0px var(--pop-black);" data-i18n="contact.team">Echipa de Proiect</h2>
+
+                    <p class="inner-text" style="background: #fafafa; padding: 10px; border: 2px solid var(--pop-black);">✉️ <strong data-i18n="contact.emailLabel">Email:</strong> <a href="mailto:salut@tineretinreactiune.ro">salut@tineretinreactiune.ro</a></p>
+                    <p class="inner-text" style="background: #fafafa; padding: 10px; border: 2px solid var(--pop-black); margin-top: 10px;">📞 <strong data-i18n="contact.phoneLabel">Telefon:</strong> <a href="tel:+40744217031">0744 217 031</a></p>
+
+                    <p class="inner-text" style="margin-top: 20px; font-style: italic; color: #333;"><span data-i18n="contact.welcome">Vă așteptăm cu drag!</span><br>Teodora Danțiș, <span data-i18n="contact.coordinator">Coordonator proiect</span></p>
+                </div>
+
+                <hr class="section-divider">
+
+                <h2 class="inner-title comic-pop" style="font-size: clamp(1.8rem, 4vw, 2.8rem);" data-i18n="contact.formTitle">Scrie-ne direct de aici</h2>
+                <form class="pop-form comic-pop" id="contactForm" data-form="contact" data-subject="Mesaj nou de pe site (Contact)" action="mailto:salut@tineretinreactiune.ro" method="post" enctype="text/plain" novalidate style="transition-delay:0.3s">
+                    <div class="form-row">
+                    <div class="field">
+                        <label for="c-name"><span data-i18n="form.name">Numele tău</span> <span class="req" aria-hidden="true">*</span></label>
+                        <input type="text" id="c-name" name="Nume" aria-describedby="c-name-err" required maxlength="80" autocomplete="name">
+                        <p class="field-error" id="c-name-err"></p>
+                    </div>
+                    <div class="field">
+                        <label for="c-email"><span data-i18n="form.email">Email</span> <span class="req" aria-hidden="true">*</span></label>
+                        <input type="email" id="c-email" name="Email" aria-describedby="c-email-err" required maxlength="120" autocomplete="email" inputmode="email">
+                        <p class="field-error" id="c-email-err"></p>
+                    </div>
+                    </div>
+                    <div class="field">
+                        <label for="c-subject"><span data-i18n="form.subject">Despre ce vrei să vorbim?</span></label>
+                        <select id="c-subject" name="Subiect" aria-describedby="c-subject-err"><option value="Întrebare generală" data-i18n="form.subject.general">Întrebare generală</option><option value="Vreau să mă implic" data-i18n="form.subject.join">Vreau să mă implic</option><option value="Parteneriat" data-i18n="form.subject.partner">Parteneriat</option><option value="Donații" data-i18n="form.subject.donate">Donații</option><option value="Altceva" data-i18n="form.subject.other">Altceva</option></select>
+                        <p class="field-error" id="c-subject-err"></p>
+                    </div>
+                    <div class="field">
+                        <label for="c-message"><span data-i18n="form.message">Mesajul tău</span> <span class="req" aria-hidden="true">*</span></label>
+                        <textarea id="c-message" name="Mesaj" aria-describedby="c-message-err" required minlength="10" maxlength="2000" rows="6"></textarea>
+                        <p class="field-error" id="c-message-err"></p>
+                    </div>
+                    <div class="field">
+                        <label class="check" for="c-consent">
+                            <input type="checkbox" id="c-consent" name="Acord GDPR" value="Da" required aria-describedby="c-consent-err">
+                            <span><span data-i18n="form.consent">Sunt de acord cu prelucrarea datelor mele conform</span> <a href="confidentialitate.html" data-i18n="form.consentLink">Politicii de confidențialitate</a>. <span class="req" aria-hidden="true">*</span></span>
+                        </label>
+                        <p class="field-error" id="c-consent-err"></p>
+                    </div>
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="c-botcheck">Nu completa acest câmp</label>
+                        <input type="checkbox" id="c-botcheck" name="botcheck" tabindex="-1" autocomplete="off">
+                    </div>
+                    <p class="form-status" role="status" aria-live="polite" hidden></p>
+                    <div class="form-actions"><button type="submit" class="btn" data-i18n="form.sendMessage">Trimite mesajul!</button></div>
+                </form>
+
+                <p class="inner-text comic-pop" style="margin-top: 2rem;" data-i18n="contact.footnote">Un proiect al asociației implementat cu sprijinul financiar al UE.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pop-footer" id="site-footer"></footer>
+
+    <script src="site-data.js"></script>
+    <script src="i18n.js"></script>
+    <script src="shared.js"></script>
+    <script src="animations.js"></script>
+    <script src="forms.js"></script>
+    <script src="search.js"></script>
+    <script src="spark.js"></script>
+</body>
+</html>
