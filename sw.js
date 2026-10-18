@@ -1,7 +1,7 @@
 // sw.js - offline support. Pages, CSS, JS, JSON: network first (always fresh), cache / offline page as fallback.
 // Images and fonts: served from cache and refreshed in the background.
 // VERSION is bumped by _tools/build.py whenever files change, so every visitor gets them.
-var VERSION = 'tr-2026-10-16-1820';
+var VERSION = 'tr-2026-10-18-1847';
 
 var CORE = [
     '/', '/index.html', '/despre.html', '/noutati.html', '/calendar.html', '/donatii.html', '/contact.html',
