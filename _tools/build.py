@@ -220,6 +220,7 @@ def load_posts():
         if meta.get('draft'):
             continue
         meta['slug'] = name[:-5]
+        meta['_file'] = os.path.join(POSTS_DIR, name)
         meta['body'] = m.group(2).strip()
         meta['url'] = 'noutati/%s.html' % meta['slug']
         words = len(grab(meta['body'], whole=True).text().split())
@@ -268,16 +269,19 @@ def make_og_image(post):
     """1200×630 JPEG from the cover photo, for Facebook/WhatsApp previews (they don't all accept WebP)."""
     if not post.get('cover'):
         return None
-    rel = os.path.join(os.path.dirname(post['cover']), 'og.jpg').replace('\\', '/')
+    # Named after the cover, so a new cover gets a new address and Facebook/WhatsApp don't show a cached old one.
+    base = os.path.splitext(os.path.basename(post['cover']))[0]
+    rel = os.path.join(os.path.dirname(post['cover']), 'og-%s.jpg' % base).replace('\\', '/')
     src, out = os.path.join(ROOT, post['cover']), os.path.join(ROOT, rel)
-    if os.path.exists(out) and os.path.getmtime(out) >= os.path.getmtime(src):
+    if os.path.exists(out) and os.path.getmtime(out) >= max(os.path.getmtime(src), os.path.getmtime(post['_file'])):
         return rel
     try:
         from PIL import Image, ImageOps
     except ImportError:
         return None
     with Image.open(src) as im:
-        ImageOps.fit(im.convert('RGB'), (1200, 630), Image.LANCZOS, centering=(0.5, 0.45)).save(out, 'JPEG', quality=85, optimize=True)
+        focus = post.get('cover_focus', 45) / 100
+        ImageOps.fit(im.convert('RGB'), (1200, 630), Image.LANCZOS, centering=(0.5, focus)).save(out, 'JPEG', quality=85, optimize=True)
     return rel
 
 
@@ -353,7 +357,9 @@ def cover_html(post, root, size='large'):
         dims = image_size(use)
         wh = ' width="%d" height="%d"' % dims if dims else ''
         loading = ' loading="lazy" decoding="async"' if size == 'card' else ' fetchpriority="high"'
-        return '<img class="cover-photo" src="%s%s" alt="%s"%s%s>' % (root, use, esc(post.get('cover_alt', '')), wh, loading)
+        # cover_focus: which part stays visible when the photo is cropped to 16:9 (0 = top, 100 = bottom)
+        focus = ' style="object-position:50%% %d%%"' % post['cover_focus'] if 'cover_focus' in post else ''
+        return '<img class="cover-photo" src="%s%s" alt="%s"%s%s%s>' % (root, use, esc(post.get('cover_alt', '')), wh, loading, focus)
     lines = post.get('cover_title') or [post['title']]
     kicker = esc(lines[0]) if len(lines) > 1 else ''
     bubble = esc(lines[-1])

@@ -20,6 +20,7 @@ Every push to `main` on GitHub is published automatically (see *Publishing*).
    Tags must exist in `TAGS` at the top of `_tools/build.py`.
 3. Photos: put them in `_content/foto/<short-name>/` and set `"cover": "noutati/img/<short-name>/<photo>.webp"`.
    The build makes small `.webp` copies and strips GPS data; the originals never leave this computer.
+   If heads get cut off in the wide cover frame, add `"cover_focus": 20` (0 = keep the top, 100 = keep the bottom).
 4. Run:
 
    ```bash
